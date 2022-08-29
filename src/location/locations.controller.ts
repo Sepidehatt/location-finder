@@ -1,4 +1,5 @@
-import { Controller, Post,Body } from "@nestjs/common";
+import { Controller, Post,Body, UseGuards } from "@nestjs/common";
+import { JwtGuard } from "./../auth/guards/jwt.guards";
 import { LocationsService } from "./locations.service";
 
 
@@ -6,6 +7,7 @@ import { LocationsService } from "./locations.service";
 export class LocationsController {
   constructor(private readonly locationService: LocationsService) { }
 
+  @UseGuards(JwtGuard)
   @Post()
   async addProduct(
     @Body('latitude') lat: number,
