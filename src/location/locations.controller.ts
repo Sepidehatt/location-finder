@@ -7,7 +7,7 @@ import { LocationsService } from "./locations.service";
 export class LocationsController {
   constructor(private readonly locationService: LocationsService) { }
 
-  @UseGuards(JwtGuard)
+  // @UseGuards(JwtGuard)
   @Post()
   async addProduct(
     @Body('latitude') lat: number,
