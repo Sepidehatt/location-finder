@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { UsersService } from './../users/users.service';
 import * as bcrypt from 'bcrypt';
 import { newUserDTO } from './../users/dtos/new-user.dto';
@@ -35,18 +35,18 @@ export class AuthService {
 
   async ValidateUser(email: string, password: string): Promise<any> {
     const user = await this.userService.findByEmail(email);
-    if (!user) return null;
+    if (!user) throw new HttpException('Incorrect username or password', HttpStatus.UNAUTHORIZED);
 
     const doesPassMatch = await this.doesPassMatch(password, user.password);
-    if (!doesPassMatch) return null;
+    if (!doesPassMatch) throw new HttpException('Incorrect username or password', HttpStatus.UNAUTHORIZED);
     return { name: user.name, email: user.email }
   }
 
   async login(existingUser: existingUserDTO): Promise<any> {
     const { email, password } = existingUser;
     const user = await this.ValidateUser(email, password)
-    if (!user) return null;
-    const jwt = await this.jwtService.signAsync({ user })
+    if (!user) throw new HttpException('Incorrect username or password', HttpStatus.UNAUTHORIZED);
+    const jwt = await this.jwtService.sign({ user })
     return { token: jwt }
   }
 
