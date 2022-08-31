@@ -21,7 +21,7 @@ export class AuthService {
 
     const existingUser = await this.userService.findByEmail(email)
 
-    if (existingUser) return 'Email taken';
+    if (existingUser) throw new HttpException('This email already exists', HttpStatus.CONFLICT);
 
     const hashedPass = await this.hashPassword(password);
     const newUser = await this.userService.createUser(name, email, hashedPass)
