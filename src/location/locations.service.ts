@@ -9,7 +9,7 @@ export class LocationsService {
   constructor(@InjectModel('Location') private readonly locationModel: Model<Location>) { }
 
   async createLocation(latitude: number, langitude: number) {
-    const newLocation = await this.locationModel.create({ latitude,langitude});
+    const newLocation = await this.locationModel.create({ latitude, langitude });
     return newLocation.id;
   };
 

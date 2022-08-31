@@ -9,7 +9,7 @@ import { AuthModule } from './auth/auth.module';
 
 
 @Module({
-  imports: [ConfigModule.forRoot({ isGlobal: true }), LocationModule, MongooseModule.forRoot("mongodb://localhost:27017" || process.env.MONGO_URI), UsersModule, AuthModule],
+  imports: [ConfigModule.forRoot({ isGlobal: true }), LocationModule, MongooseModule.forRoot(process.env.MONGO_URI || "mongodb://localhost:27017" ), UsersModule, AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })
