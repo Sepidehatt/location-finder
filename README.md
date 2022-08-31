@@ -71,4 +71,4 @@ $ npm run start:prod
 ```
 
 ## Test
-TODO
+Should be prepared.
