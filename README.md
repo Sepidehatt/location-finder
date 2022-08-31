@@ -24,7 +24,32 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+This repo contains the backend for a small project which gets the GPS location (latitude, longitude) from browser and stores it in the database.
+The frontend repo is available through the below URL: \
+https://github.com/Sepidehatt/location-finder-client
+
+The backend API endpoint is available through the below link: \
+https://location-finder-apis.herokuapp.com/
+
+### API Endpoints:
+| HTTP verb | URL | Request body | Action |
+| ------ | ---------------- | ----- | ------------------ |
+| POST | /auth/register | JSON | Registers a new user |
+| POST | /auth/login | JSON | Authenticates a user |
+| POST | /create-location | JSON | Creates a new location |
+
+The frontend demo is accessable via the below link: \
+https://location-finder-2022.netlify.app
+
+## Database
+Mongodb has used for this project.
+
+## Environment 
+```
+export SECRET_TOKEN=<SECRET>
+export PORT=<PORT>
+export ORIGIN=<FRONTEND_URL> 
+```
 
 ## Installation
 
@@ -46,28 +71,4 @@ $ npm run start:prod
 ```
 
 ## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+TODO
