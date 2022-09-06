@@ -1,9 +1,8 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { UsersService } from './../users/users.service';
 import * as bcrypt from 'bcrypt';
-import { newUserDTO } from './../users/dtos/new-user.dto';
 import { User } from './../users/user.model';
-import { existingUserDTO } from 'src/users/dtos/existing-user.dto';
+import { ExistingUserDTO } from 'src/users/dtos/existing-user.dto';
 import { JwtService } from '@nestjs/jwt';
 import { RegisterUserDTO } from 'src/users/dtos/registeredUser.dto';
 
@@ -17,7 +16,7 @@ export class AuthService {
     return bcrypt.hash(password, 12)
   }
 
-  async register(user: Readonly<newUserDTO>): Promise<RegisterUserDTO> {
+  async register(user: Readonly<User>): Promise<RegisterUserDTO> {
     const { name, email, password } = user;
 
     const existingUser = await this.userService.findByEmail(email)
@@ -51,7 +50,7 @@ export class AuthService {
     return { name: user.name, email: user.email }
   }
 
-  async login(existingUser: existingUserDTO): Promise<{ token: string }> {
+  async login(existingUser: ExistingUserDTO): Promise<{ token: string }> {
     const { email, password } = existingUser;
     const user = await this.ValidateUser(email, password)
     if (!user)
