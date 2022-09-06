@@ -8,8 +8,8 @@ import { Location } from "./location.model";
 export class LocationsService {
   constructor(@InjectModel('Location') private readonly locationModel: Model<Location>) { }
 
-  async createLocation(latitude: number, langitude: number): Promise<string> {
-    const newLocation = await this.locationModel.create({ latitude, langitude });
+  async createLocation(location: Location): Promise<string> {
+    const newLocation = await this.locationModel.create(location);
     return newLocation.id;
   };
 
