@@ -10,7 +10,7 @@ export class LocationsController {
   async addProduct(
     @Body('latitude') lat: number,
     @Body('langitude') lang: number
-  ) {
+  ):Promise<{id:string}> {
     const generatedId = await this.locationService.createLocation(lat, lang);
     return { id: generatedId }
   }

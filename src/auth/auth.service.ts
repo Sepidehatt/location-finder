@@ -5,6 +5,7 @@ import { newUserDTO } from './../users/dtos/new-user.dto';
 import { User } from './../users/user.model';
 import { existingUserDTO } from 'src/users/dtos/existing-user.dto';
 import { JwtService } from '@nestjs/jwt';
+import { RegisterUserDTO } from 'src/users/dtos/registeredUser.dto';
 
 
 
@@ -16,7 +17,7 @@ export class AuthService {
     return bcrypt.hash(password, 12)
   }
 
-  async register(user: Readonly<newUserDTO>): Promise<User | any> {
+  async register(user: Readonly<newUserDTO>): Promise<RegisterUserDTO> {
     const { name, email, password } = user;
 
     const existingUser = await this.userService.findByEmail(email)
@@ -33,19 +34,31 @@ export class AuthService {
     return bcrypt.compare(password, hashedPass)
   }
 
-  async ValidateUser(email: string, password: string): Promise<any> {
+  async ValidateUser(email: string, password: string): Promise<{ name: string, email: string }> {
     const user = await this.userService.findByEmail(email);
-    if (!user) throw new HttpException('Incorrect username or password', HttpStatus.UNAUTHORIZED);
+    if (!user)
+      throw new HttpException(
+        'Incorrect username or password',
+        HttpStatus.UNAUTHORIZED
+      );
 
     const doesPassMatch = await this.doesPassMatch(password, user.password);
-    if (!doesPassMatch) throw new HttpException('Incorrect username or password', HttpStatus.UNAUTHORIZED);
+    if (!doesPassMatch)
+      throw new HttpException(
+        'Incorrect username or password',
+        HttpStatus.UNAUTHORIZED
+      );
     return { name: user.name, email: user.email }
   }
 
-  async login(existingUser: existingUserDTO): Promise<any> {
+  async login(existingUser: existingUserDTO): Promise<{ token: string }> {
     const { email, password } = existingUser;
     const user = await this.ValidateUser(email, password)
-    if (!user) throw new HttpException('Incorrect username or password', HttpStatus.UNAUTHORIZED);
+    if (!user)
+      throw new HttpException(
+        'Incorrect username or password',
+        HttpStatus.UNAUTHORIZED
+      );
     const jwt = await this.jwtService.sign({ user })
     return { token: jwt }
   }
