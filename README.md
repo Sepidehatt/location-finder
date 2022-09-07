@@ -36,7 +36,7 @@ https://location-finder-apis.herokuapp.com/
 | ------ | ---------------- | ----- | ------------------ |
 | POST | /auth/register | JSON | Registers a new user |
 | POST | /auth/login | JSON | Authenticates a user |
-| POST | /create-location | JSON | Creates a new location |
+| POST | /locations | JSON | Creates a new location |
 
 The frontend demo is accessable via the below link: \
 https://location-finder-2022.netlify.app

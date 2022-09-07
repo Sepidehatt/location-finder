@@ -3,7 +3,7 @@ import { Location } from "./location.model";
 import { LocationsService } from "./locations.service";
 
 
-@Controller('create-location')
+@Controller('locations')
 export class LocationsController {
   constructor(private readonly locationService: LocationsService) { }
 
