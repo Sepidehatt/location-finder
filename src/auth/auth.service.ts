@@ -2,9 +2,9 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { UsersService } from './../users/users.service';
 import * as bcrypt from 'bcrypt';
 import { User } from './../users/user.model';
-import { ExistingUserDTO } from 'src/users/dtos/existing-user.dto';
+import { ExistingUserDTO } from '../users/dtos/existing-user.dto';
 import { JwtService } from '@nestjs/jwt';
-import { RegisterUserDTO } from 'src/users/dtos/registeredUser.dto';
+import { RegisterUserDTO } from '../users/dtos/registeredUser.dto';
 
 
 
@@ -37,7 +37,7 @@ export class AuthService {
     const user = await this.userService.findByEmail(email);
     if (!user)
       throw new HttpException(
-        'Incorrect username or password',
+        'Incorrect email or password',
         HttpStatus.UNAUTHORIZED
       );
 
